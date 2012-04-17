@@ -9,7 +9,7 @@ class CodeViewer extends Controller {
 	
 	public static $url_handlers = array(
 		''       => 'browse',
-		'$Class' => 'viewClass'
+		'viewcode/$Class' => 'viewClass'
 	);
 	
 	static $allowed_actions = array(
@@ -127,12 +127,12 @@ class CodeViewer extends Controller {
 		}
 		
 		return $this->customise(array (
-			'Content' => $this->testAnalysis(getClassFile($class))
+			'Content' => $this->testAnalysis(SS_ClassLoader::instance()->getItemPath($class))
 		))->renderWith('CodeViewer');
 	}
 	
 	public function Link($action = null) {
-		return Controller::join_links(Director::absoluteBaseURL(), 'dev/viewcode/', $action);
+		return Controller::join_links(Director::absoluteBaseURL(), 'CodeViewer/viewcode/', $action);
 	}
 	
 	protected $classComment, $methodComment;
@@ -149,7 +149,7 @@ class CodeViewer extends Controller {
 			"description" => $this->classComment['pretty'],
 			"heading" => isset($this->classComment['heading']) ? $this->classComment['heading'] : null,
 		);
-		$ths->classComment = null;
+		$this->classComment = null;
 	}
 	function setClassName($token) {
 		$this->currentClass['name'] = $token[1];

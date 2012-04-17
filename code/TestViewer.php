@@ -5,6 +5,7 @@
  * @subpackage testing
  */
 class TestViewer extends Controller {
+
 	/**
 	 * Define a simple finite state machine.
 	 * Top keys are the state names.  'start' is the first state, and 'die' is the error state.
@@ -162,11 +163,15 @@ class TestViewer extends Controller {
 	
 	protected $classes = array();
 	protected $currentMethod, $currentClass;
+
+	function show() {
+		return $this->renderWith('TestViewer');
+	}
 	
 	function Content() {
 		$className = $this->urlParams['ID'];
 		if($className && ClassInfo::exists($className)) {
-			return $this->testAnalysis(getClassFile($className));
+			return $this->testAnalysis(SS_ClassLoader::instance()->getItemPath($className));
 		} else {
 			$result = "<h1>View any of the following test classes</h1>";
 			$classes = ClassInfo::subclassesFor('SapphireTest');
