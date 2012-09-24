@@ -1,0 +1,16 @@
+{
+	"name": "silverstripe-labs/codeviz",
+	"description": "Codeviz module provides some code insight based on file parsing and model inspection.
+		It has been pulled out of the core in SilverStripe 3.0 and is provided as is.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe-labs", "codeviz"],
+	"authors": [
+	{
+		"name": "Mateusz U"
+	}
+	],
+	"require":
+	{
+		"silverstripe/framework": "3.*"
+	}
+}
